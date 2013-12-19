@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="ngSelectize" ng-controller="SelectizeCtrl">
+<head>
+    <title>ngSelectize Demo</title>
+
+    <meta charset="utf-8">
+
+    <link type="text/css" rel="stylesheet" href="bower_components/selectize/dist/css/selectize.bootstrap2.css">
+
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/selectize/dist/js/standalone/selectize.js"></script>
+    <script src="ng-selectize.js"></script>
+</head>
+<body>
+
+<button ng-click="numbers.push({name: 'Foo', id: 566})">Add Number</button>
+
+<div>
+    <button ng-click="selected = null;">Reset</button>
+</div>
+
+<div>
+    <button ng-repeat="number in numbers" ng-click="$parent.selected = number.id;">{{number.name}}</button>
+</div>
+
+<br>
+<button ng-click="numbers = null">Delete Numbers</button>
+<br>
+
+<div>
+    <button ng-click="copy()">Copy</button>
+</div>
+
+{{selected}}
+<select ng-options="number.id as number.name for number in numbers" ng-model="selected">
+    <option value="">Nulloption</option>
+</select>
+<select ng-selectize ng-options="number.id as number.name for number in numbers" ng-model="selected"></select>
+
+
+{{selected2}}
+<select ng-options="number as number.name for number in numbers" ng-model="selected2">
+    <option value="">Nulloption</option>
+</select>
+<select ng-selectize="{placeholder: 'Select a number'}" ng-options="number as number.name for number in numbers" ng-model="selected2">
+
+</select>
+
+</body>
+</html>
