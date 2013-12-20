@@ -1,6 +1,6 @@
 {
   "name": "ng-selectize",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "angular": "1.2.0",
     "selectize": "~0.8.5"
