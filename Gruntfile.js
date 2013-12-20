@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     concat: {
       standalone: {
         src: [
-          'bower_components/selectize/dist/js/standalone/selectize.min.js',
+          'lib/selectize/dist/js/standalone/selectize.min.js',
           'dist/ng-selectize.min.js'
         ],
         dest: 'dist/standalone/ng-selectize.min.js'
