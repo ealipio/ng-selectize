@@ -199,7 +199,7 @@ angular.module('ngSelectize', [])
                 return value.indexOf(this.value) > -1;
               })
               .prop('selected', true)
-            .end()
+              .end().end()
             .trigger('change');
         }
 
@@ -236,7 +236,6 @@ angular.module('ngSelectize', [])
             }, 0)
           };
         }
-
 
         selectize.on('item_add', updateOriginalInput);
         selectize.on('item_remove', updateOriginalInput);
