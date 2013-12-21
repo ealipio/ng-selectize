@@ -1,6 +1,16 @@
 {
   "name": "ng-selectize",
   "version": "0.1.1",
+  "main": "ng-selectize.js",
+  "ignore": [
+    "bower_components",
+    "node_modules",
+    "test",
+    "Gruntfile.js",
+    "package.json",
+    ".bowerrc",
+    "lib"
+  ],
   "dependencies": {
     "angular": "1.2.0",
     "selectize": "~0.8.5"
