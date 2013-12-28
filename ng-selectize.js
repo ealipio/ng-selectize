@@ -40,17 +40,17 @@ angular.module('ngSelectize', [])
       }
     }
 
+    function readData($element) {
+      var data = $element.attr('data-data');
+      if (typeof data === 'string' && data.length) {
+        return JSON.parse(data);
+      }
+      return null;
+    }
+
     var init_select = function($input, settings_element) {
       var i, n, tagName, $children, order = 0;
       var options = settings_element.options;
-
-      var readData = function($el) {
-        var data = $el.attr('data-data');
-        if (typeof data === 'string' && data.length) {
-          return JSON.parse(data);
-        }
-        return null;
-      };
 
       var addOption = function($option, group) {
         var option;
@@ -96,8 +96,8 @@ angular.module('ngSelectize', [])
 
         if (id) {
           optgroup = readData($optgroup) || {};
-          optgroup['label'] = id;
-          optgroup['value'] = id;
+          optgroup.label = id;
+          optgroup.value = id;
           settings_element.optgroups[id] = optgroup;
         }
 

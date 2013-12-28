@@ -11,9 +11,9 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // Dependencies
-      'bower_components/jquery/jquery.min.js',
-      'bower_components/angular/angular.min.js',
-      'bower_components/angular-mocks/angular-mocks.js',
+      'lib/jquery/jquery.min.js',
+      'lib/angular/angular.min.js',
+      'lib/angular-mocks/angular-mocks.js',
       'dist/standalone/ng-selectize.min.js',
 
       // Test Specs
