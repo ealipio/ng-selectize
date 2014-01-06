@@ -22,6 +22,13 @@ describe('Tests for the ngSelectize directive', function() {
       }).toThrow();
     });
 
+    it('should throw an error if the element is not a select element', function() {
+      expect(function() {
+        compile('<input type="text" ng-selectize ng-model="selected">');
+      }).toThrow();
+    });
+
+
     it('should compile without an error', function() {
       expect(function() {
         compile('<select ng-selectize ng-model="selected"></select>');

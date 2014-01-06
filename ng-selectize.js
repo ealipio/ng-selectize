@@ -171,6 +171,14 @@ angular.module('ngSelectize', [])
       selectize.setActiveOption(option, false);
     }
 
+    function checkElement(element) {
+      var type = element.nodeName.toLowerCase();
+
+      if (type !== 'select') {
+        throw new Error('Invalid element given.');
+      }
+    }
+
     return {
       restrict: 'A',
       require: 'ngModel',
@@ -213,6 +221,8 @@ angular.module('ngSelectize', [])
         }
 
         if (!angular.isDefined(attrs.ngOptions)) {
+          checkElement(element[0]);
+
           parsed = parseSelect(element);
 
           select = element.selectize(userOptions);
