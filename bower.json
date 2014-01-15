@@ -9,7 +9,8 @@
     "Gruntfile.js",
     "package.json",
     ".bowerrc",
-    "lib"
+    "lib",
+    ".gitignore"
   ],
   "dependencies": {
     "angular": "1.2.0",
