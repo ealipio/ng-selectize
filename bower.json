@@ -1,6 +1,6 @@
 {
   "name": "ng-selectize",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "ng-selectize.js",
   "ignore": [
     "bower_components",
