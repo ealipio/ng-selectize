@@ -231,7 +231,6 @@ angular.module('ngSelectize', [])
           select = element.selectize(userOptions);
           selectize = select[0].selectize;
 
-          selectize.clearOptions();
           setOptions(selectize, parsed.options);
 
           element.on('change', function() {
