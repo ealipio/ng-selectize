@@ -6,7 +6,7 @@ angular.module('ngSelectizeDemo', ['ngSelectize'])
       return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    $scope.selectedOption = undefined;
+    $scope.selectedOption = $scope.selectedOption2 = undefined;
 
     $scope.options = [
       {label: 'Option 1', value: 1},
@@ -18,5 +18,9 @@ angular.module('ngSelectizeDemo', ['ngSelectize'])
 
     $scope.selectRandomOption = function() {
       $scope.selectedOption = $scope.options[getRandomInt(0, $scope.options.length - 1)];
+    };
+
+    $scope.selectRandomOption2 = function() {
+      $scope.selectedOption2 = getRandomInt(1, 5);
     };
 });

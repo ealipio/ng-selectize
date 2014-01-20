@@ -424,6 +424,8 @@ Small Device Styles
     min-width: 320px;
     max-width: 480px;
     font-size: 11px;
+    white-space: pre; /* CSS3 */
+    white-space: -moz-pre-wrap; /* Mozilla, post millennium */
   }
 
 }

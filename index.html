@@ -33,11 +33,16 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer" ng-cloak>
         <section id="main_content" class="inner">
-            <h3>Demo</h3>
+            <h3>Demo ng-options</h3>
 
             <div>
-                Setup:
-                <pre>&lt;select ng-model="selectedOption" ng-options="o.label for o in options" ng-selectize&gt;&lt;/select&gt;</pre>
+                Markup:
+                <pre>
+&lt;select
+    ng-model="selectedOption"
+    ng-options="o.label for o in options"
+    ng-selectize&gt;
+&lt;/select&gt;</pre>
             </div>
 
             <div class="selected-option">
@@ -48,6 +53,35 @@
             <select ng-model="selectedOption" ng-options="o.label for o in options" ng-selectize></select>
 
             <button class="btn btn-default" ng-click="selectRandomOption()">Select a random option</button>
+
+            <h3>Demo static</h3>
+
+            <div>
+                Markup:
+                <pre>
+&lt;select ng-model="selectedOption" ng-selectize&gt;
+    &lt;option value="1"&gt;Option 1&lt;/option&gt;
+    &lt;option value="2"&gt;Option 2&lt;/option&gt;
+    &lt;option value="3"&gt;Option 3&lt;/option&gt;
+    &lt;option value="4"&gt;Option 4&lt;/option&gt;
+    &lt;option value="5"&gt;Option 5&lt;/option&gt;
+&lt;/select&gt;</pre>
+            </div>
+
+            <div class="selected-option">
+                Selected option:
+                <code>{{selectedOption2 || 'nothing selected'}}</code>
+            </div>
+
+            <select ng-model="selectedOption2" ng-selectize>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+                <option value="5">Option 5</option>
+            </select>
+
+            <button class="btn btn-default" ng-click="selectRandomOption2()">Select a random option</button>
 
         </section>
     </div>
