@@ -231,7 +231,10 @@ angular.module('ngSelectize', [])
           select = element.selectize(userOptions);
           selectize = select[0].selectize;
 
-          setOptions(selectize, parsed.options);
+          setTimeout(function() {
+            selectize.clearOptions();
+            setOptions(selectize, parsed.options);
+          }, 0);
 
           element.on('change', function() {
             if (selectize.getValue() === '?') {
