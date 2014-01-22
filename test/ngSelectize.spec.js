@@ -51,10 +51,23 @@ describe('Tests for the ngSelectize directive', function() {
           '<option value="1">One</option>' +
           '</select>');
 
+        var ready = false;
         $scope.$apply();
 
-        var $content = element.next().find('.selectize-dropdown').find('.selectize-dropdown-content');
-        expect($content.children().length).toBe(3);
+        runs(function() {
+          setTimeout(function() {
+            ready = true;
+          }, 10);
+        });
+
+        waitsFor(function() {
+          return ready;
+        });
+
+        runs(function() {
+          var $content = element.next().find('.selectize-dropdown').find('.selectize-dropdown-content');
+          expect($content.children().length).toBe(3);
+        });
       });
 
       it('should update the model', function() {
@@ -151,7 +164,51 @@ describe('Tests for the ngSelectize directive', function() {
           expect(values.length).toBe(2);
         });
       });
-    })
+    });
+
+    describe('Tests for user options', function() {
+
+      describe('placeholder option', function() {
+
+        it('should display the placeholder when no ng-options are defined', function() {
+          var element = compile('<select ng-selectize="{placeholder:\'Eat my shorts!\'}" ng-model="selected">' +
+            '<option value="0">Zero</option>' +
+            '<option value="1">One</option>' +
+            '</select>');
+
+          var ready = false;
+          $scope.$apply();
+
+          runs(function() {
+            setTimeout(function() {
+              ready = true;
+            }, 10);
+          });
+
+          waitsFor(function() {
+            return ready;
+          });
+
+          runs(function() {
+            var $content = element.next().find('.selectize-input');
+            expect($content.children('input').attr('placeholder')).toBe('Eat my shorts!');
+          });
+        });
+
+        it('should display the placeholder when ng-options are defined', function() {
+          $scope.options = [{name: 'One', value: 1}, {name: 'Two', value: 2}, {name: 'Three', value: 3}];
+
+          var element = compile('<select ng-selectize="{placeholder:\'Eat my shorts!\'}" ng-model="selected" ng-options="o.value as o.name for o in options"></select>');
+          $scope.$apply();
+
+          var $content = element.next().find('.selectize-input');
+          expect($content.children('input').attr('placeholder')).toBe('Eat my shorts!');
+
+        });
+
+      });
+
+    });
 
   });
 
