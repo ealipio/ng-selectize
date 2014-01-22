@@ -1,6 +1,7 @@
 angular.module('ngSelectize', [])
 
 .directive('ngSelectize', function() {
+    'use strict';
 
     /**
      *
@@ -37,7 +38,7 @@ angular.module('ngSelectize', [])
       return {
         text: label || '',
         value: value || ''
-      }
+      };
     }
 
     function readData($element) {
@@ -49,10 +50,10 @@ angular.module('ngSelectize', [])
     }
 
     var init_select = function($input, settings_element) {
-      var i, n, tagName, $children, order = 0;
-      var options = settings_element.options;
+      var i, n, tagName, $children, order = 0,
+          options = settings_element.options,
 
-      var addOption = function($option, group) {
+      addOption = function($option, group) {
         var option;
 
         $option = $($option);
@@ -76,7 +77,9 @@ angular.module('ngSelectize', [])
          }
          */
 
-        if (option = parseOption($option)) {
+        option = parseOption($option);
+
+        if (option) {
           option.optgroup = group;
           option.$order = ++order;
           options.push(option);
@@ -86,9 +89,9 @@ angular.module('ngSelectize', [])
           }
         }
 
-      };
+      },
 
-      var addGroup = function($optgroup) {
+      addGroup = function($optgroup) {
         var i, n, id, optgroup, $options;
 
         $optgroup = $($optgroup);
@@ -122,18 +125,18 @@ angular.module('ngSelectize', [])
 
     /**
      *
-     * @param {Object} element
+     * @param {Object} $element
      *
      * @returns {{options: Array, optgroups: {}, items: Array}}
      */
-    function parseSelect(element) {
+    function parseSelect($element) {
       var options = {
         options: [],
         optgroups: {},
         items: []
       };
 
-      init_select(element, options);
+      init_select($element, options);
 
       return options;
     }
@@ -228,7 +231,6 @@ angular.module('ngSelectize', [])
           select = element.selectize(userOptions);
           selectize = select[0].selectize;
 
-          selectize.clearOptions();
           setOptions(selectize, parsed.options);
 
           element.on('change', function() {
@@ -243,7 +245,7 @@ angular.module('ngSelectize', [])
 
             timeout = setTimeout(function() {
               setActiveOption(selectize, ctrl.$modelValue);
-            }, 0)
+            }, 0);
           };
         }
 
@@ -280,8 +282,8 @@ angular.module('ngSelectize', [])
         scope.$on('$destroy', function() {
           selectize.destroy();
           clearTimeout(timeout);
-        })
+        });
       }
-    }
+    };
   }
 );

@@ -1,6 +1,6 @@
 {
   "name": "ng-selectize",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "main": "ng-selectize.js",
   "ignore": [
     "bower_components",
@@ -9,25 +9,25 @@
     "Gruntfile.js",
     "package.json",
     ".bowerrc",
-    "lib"
+    "lib",
+    ".gitignore"
   ],
   "dependencies": {
-    "angular": "1.2.0",
+    "angular": "1.2.8",
     "selectize": "~0.8.5"
   },
   "devDependencies": {
     "bootstrap": "~3.0.1",
-    "angular-mocks": "~1.2.0"
+    "angular-mocks": "1.2.8"
   },
   "homepage": "https://github.com/preventdefault/ng-selectize",
-  "_release": "0.1.3",
+  "_release": "0.1.5",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.3",
-    "commit": "322b6ba6bca323904d71a16a7d0bc2644a11239d"
+    "tag": "0.1.5",
+    "commit": "c1fc0f91efee44ac7b988c741ff1e3731b93b829"
   },
   "_source": "git://github.com/preventdefault/ng-selectize.git",
   "_target": "~0.1.3",
-  "_originalSource": "angularjs-selectize",
-  "_direct": true
+  "_originalSource": "angularjs-selectize"
 }
