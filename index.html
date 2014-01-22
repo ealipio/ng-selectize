@@ -54,6 +54,8 @@
 
             <button class="btn btn-default" ng-click="selectRandomOption()">Select a random option</button>
 
+            <hr>
+
             <h3>Demo static</h3>
 
             <div>
@@ -82,6 +84,28 @@
             </select>
 
             <button class="btn btn-default" ng-click="selectRandomOption2()">Select a random option</button>
+
+            <hr>
+
+            <h3>User Options</h3>
+
+            <h4>Placeholder</h4>
+
+            <div>
+                Markup:
+                <pre>
+&lt;select
+    ng-model="model"
+    ng-selectize="{placeholder:'Select a value ...'}"&gt;
+    &lt;option value="1"&gt;Option 1&lt;/option&gt;
+    &lt;option value="2"&gt;Option 2&lt;/option&gt;
+&lt;/select&gt;</pre>
+            </div>
+
+            <select ng-model="model" ng-selectize="{placeholder:'Select a value ...'}">
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+            </select>
 
         </section>
     </div>
