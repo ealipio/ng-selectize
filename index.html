@@ -33,7 +33,9 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer" ng-cloak>
         <section id="main_content" class="inner">
-            <h3>Demo ng-options</h3>
+            <h3>Basic</h3>
+
+            <h4>ng-options</h4>
 
             <div>
                 Markup:
@@ -56,7 +58,7 @@
 
             <hr>
 
-            <h3>Demo static</h3>
+            <h4>static</h4>
 
             <div>
                 Markup:
@@ -87,6 +89,28 @@
 
             <hr>
 
+            <h4>multiple</h4>
+
+            <div>
+                Markup:
+                <pre>
+&lt;select
+    ng-model="selectedOptions"
+    ng-selectize
+    multiple
+    ng-options="o.label for o in options"&gt;
+&lt;/select&gt;</pre>
+            </div>
+
+            <div class="selected-option">
+                Selected options:
+                <code>{{selectedOptions || 'nothing selected'}}</code>
+            </div>
+
+            <select ng-model="selectedOptions" ng-options="o.label for o in options" ng-selectize multiple></select>
+
+            <hr>
+
             <h3>User Options</h3>
 
             <h4>Placeholder</h4>
@@ -106,6 +130,30 @@
                 <option value="1">Option 1</option>
                 <option value="2">Option 2</option>
             </select>
+
+            <hr>
+
+            <h3>Plugins</h3>
+
+            <h4>remove_button</h4>
+
+            <div>
+                Markup:
+                <pre>
+&lt;select
+    ng-model="selectedOption"
+    ng-options="o.label for o in options"
+    ng-selectize="{plugins: ['remove_button']"
+    multiple&gt;
+&lt;/select&gt;</pre>
+            </div>
+
+            <div class="selected-option">
+                Selected options:
+                <code>{{selectedOptions || 'nothing selected'}}</code>
+            </div>
+
+            <select ng-model="selectedOptions" ng-options="o.label for o in options" multiple ng-selectize="{plugins: ['remove_button']}"></select>
 
         </section>
     </div>
