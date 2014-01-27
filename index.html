@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link rel="stylesheet" type="text/css" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="bower_components/selectize/dist/css/selectize.bootstrap3.css">
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/default.min.css">
 
     <title>ng-selectize.js</title>
   </head>
@@ -39,12 +40,11 @@
 
             <div>
                 Markup:
-                <pre>
-&lt;select
+                <pre><code class="html">&lt;select
     ng-model="selectedOption"
     ng-options="o.label for o in options"
     ng-selectize&gt;
-&lt;/select&gt;</pre>
+&lt;/select&gt;</code></pre>
             </div>
 
             <div class="selected-option">
@@ -62,14 +62,13 @@
 
             <div>
                 Markup:
-                <pre>
-&lt;select ng-model="selectedOption" ng-selectize&gt;
+                <pre><code class="html">&lt;select ng-model="selectedOption" ng-selectize&gt;
     &lt;option value="1"&gt;Option 1&lt;/option&gt;
     &lt;option value="2"&gt;Option 2&lt;/option&gt;
     &lt;option value="3"&gt;Option 3&lt;/option&gt;
     &lt;option value="4"&gt;Option 4&lt;/option&gt;
     &lt;option value="5"&gt;Option 5&lt;/option&gt;
-&lt;/select&gt;</pre>
+&lt;/select&gt;</code></pre>
             </div>
 
             <div class="selected-option">
@@ -93,13 +92,12 @@
 
             <div>
                 Markup:
-                <pre>
-&lt;select
+                <pre><code class="html">&lt;select
     ng-model="selectedOptions"
     ng-selectize
     multiple
     ng-options="o.label for o in options"&gt;
-&lt;/select&gt;</pre>
+&lt;/select&gt;</code></pre>
             </div>
 
             <div class="selected-option">
@@ -117,13 +115,12 @@
 
             <div>
                 Markup:
-                <pre>
-&lt;select
+                <pre><code class="html">&lt;select
     ng-model="model"
     ng-selectize="{placeholder:'Select a value ...'}"&gt;
     &lt;option value="1"&gt;Option 1&lt;/option&gt;
     &lt;option value="2"&gt;Option 2&lt;/option&gt;
-&lt;/select&gt;</pre>
+&lt;/select&gt;</code></pre>
             </div>
 
             <select ng-model="model" ng-selectize="{placeholder:'Select a value ...'}">
@@ -139,18 +136,12 @@
 
             <div>
                 Markup:
-                <pre>
-&lt;select
+                <pre><code class="html">&lt;select
     ng-model="selectedOption"
     ng-options="o.label for o in options"
     ng-selectize="{plugins: ['remove_button']"
     multiple&gt;
-&lt;/select&gt;</pre>
-            </div>
-
-            <div class="selected-option">
-                Selected options:
-                <code>{{selectedOptions || 'nothing selected'}}</code>
+&lt;/select&gt;</code></pre>
             </div>
 
             <select ng-model="selectedOptions" ng-options="o.label for o in options" multiple ng-selectize="{plugins: ['remove_button']}"></select>
@@ -171,6 +162,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
     <script src="bower_components/angularjs-selectize/dist/ng-selectize.min.js"></script>
     <script src="javascripts/main.js"></script>
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 
   </body>
 </html>
