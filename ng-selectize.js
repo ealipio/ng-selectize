@@ -186,6 +186,9 @@ angular.module('ngSelectize', [])
       restrict: 'A',
       require: 'ngModel',
       priority: 1000,
+      scope: {
+        ngSelectize: '='
+      },
       link: function(scope, element, attrs, ctrl) {
 
         var lastParsed,
@@ -194,7 +197,7 @@ angular.module('ngSelectize', [])
             timeout,
             parsed,
             render = ctrl.$render,
-            userOptions = config(scope.$eval(attrs.ngSelectize));
+            userOptions = config(scope.ngSelectize);
 
         function updateOriginalInput() {
           var value = this.getValue();
