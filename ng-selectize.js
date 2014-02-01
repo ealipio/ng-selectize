@@ -1,7 +1,9 @@
 angular.module('ngSelectize', [])
 
-.directive('ngSelectize', function() {
+.directive('ngSelectize', ['$parse', function($parse) {
     'use strict';
+
+    var NG_OPTIONS_REGEXP = /^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+group\s+by\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?$/;
 
     /**
      *
@@ -49,7 +51,7 @@ angular.module('ngSelectize', [])
       return null;
     }
 
-    var init_select = function($input, settings_element) {
+    function init_select($input, settings_element) {
       var i, n, tagName, $children, order = 0,
           options = settings_element.options,
 
@@ -121,7 +123,7 @@ angular.module('ngSelectize', [])
           addOption($children[i]);
         }
       }
-    };
+    }
 
     /**
      *
@@ -182,6 +184,28 @@ angular.module('ngSelectize', [])
       }
     }
 
+    function getValueFn(valuesFn, data) {
+      return function(value) {
+        return valuesFn(data)[value];
+      };
+    }
+
+    function decorateRenderer(config) {
+      if (!config.provider || !config.provider[config.method]) {
+        return;
+      }
+
+      var renderFn = config.provider[config.method];
+
+      config.provider[config.method] = function(item, escapeFn) {
+        return renderFn.call(
+          this,
+          config.valueFn(item.value),
+          escapeFn
+        );
+      };
+    }
+
     return {
       restrict: 'A',
       require: 'ngModel',
@@ -196,8 +220,11 @@ angular.module('ngSelectize', [])
             selectize,
             timeout,
             parsed,
+            valuesFn,
+            valueFn,
             render = ctrl.$render,
-            userOptions = config(scope.ngSelectize);
+            userOptions = config(scope.ngSelectize),
+            match = (attrs.ngOptions || '').match(NG_OPTIONS_REGEXP);
 
         function updateOriginalInput() {
           var value = this.getValue();
@@ -218,6 +245,17 @@ angular.module('ngSelectize', [])
         }
 
         if (angular.isDefined(attrs.ngOptions)) {
+          valuesFn = $parse(match[7]);
+          valueFn = getValueFn(valuesFn, scope.$parent);
+
+          ['option', 'item'].forEach(function(method) {
+            decorateRenderer({
+              provider: userOptions.render,
+              method: method,
+              valueFn: valueFn
+            });
+          });
+
           select = element.selectize(userOptions);
           selectize = select[0].selectize;
 
@@ -292,4 +330,4 @@ angular.module('ngSelectize', [])
       }
     };
   }
-);
+]);

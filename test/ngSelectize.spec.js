@@ -208,6 +208,81 @@ describe('Tests for the ngSelectize directive', function() {
 
       });
 
+      describe('custom item and option creation', function() {
+
+        it('should work when a custom option renderer is provided', function() {
+          $scope.options = [
+            {label: 'Label 1', value: 'Value 1'},
+            {label: 'Label 2', value: 'Value 2'}
+          ];
+
+          $scope.config = {
+            render: {
+              option: function(option, escape) {
+                var label = option.label,
+                    value = option.value;
+
+                return '<div><span>' + escape(label) + '</span><span>' + escape(value) + '</span></div>';
+              }
+            }
+          };
+
+          var element = compile('<select ng-selectize="config" ng-model="selected" ng-options="o as o.label for o in options"></select>');
+          $scope.$apply();
+
+          var ready = false;
+          runs(function() {
+            setTimeout(function() {
+              ready = true;
+              var dropDownContent = element.next().find('.selectize-dropdown-content').children('div').eq(0).html();
+              expect(dropDownContent).toBe('<span>Label 1</span><span>Value 1</span>');
+            }, 10);
+          });
+
+          waitsFor(function() {
+            return ready;
+          });
+        });
+
+        it('should work when a custom option renderer is provided', function() {
+          $scope.options = [
+            {label: 'Label 1', value: 'Value 1'},
+            {label: 'Label 2', value: 'Value 2'}
+          ];
+
+          $scope.selected = $scope.options[0];
+
+          $scope.config = {
+            render: {
+              item: function(option, escape) {
+                var label = option.label,
+                    value = option.value;
+
+                return '<div><span>' + escape(label) + '</span><span>' + escape(value) + '</span></div>';
+              }
+            }
+          };
+
+          var element = compile('<select ng-selectize="config" ng-model="selected" ng-options="o as o.label for o in options"></select>');
+          $scope.$apply();
+
+          var ready = false;
+          runs(function() {
+            setTimeout(function() {
+              ready = true;
+              var dropDownContent = element.next().find('.selectize-input').children('div').eq(0).html();
+              expect(dropDownContent).toBe('<span>Label 1</span><span>Value 1</span>');
+            }, 10);
+          });
+
+          waitsFor(function() {
+            return ready;
+          });
+        });
+
+
+      });
+
     });
 
   });
