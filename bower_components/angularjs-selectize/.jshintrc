@@ -1,7 +1,8 @@
 {
   "globals": {
     "angular": true,
-    "$": true
+    "$": true,
+    "console": true
   },
   "indent": 2,
   "browser" : true,

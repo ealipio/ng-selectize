@@ -130,6 +130,60 @@
 
             <hr>
 
+            <h4>Custom option renderer</h4>
+
+            <div>
+                Markup:
+                <pre><code class="html">&lt;select
+    ng-model="selectedOptions"
+    ng-selectize="config"&gt;
+    ng-options="o.label for o in options"
+    multiple
+&lt;/select&gt;</code></pre>
+            </div>
+
+            <div>
+                Javascript:
+                <pre><code class="javascript">$scope.config = {
+    render: {
+        option: function(item, escape) {
+            return '&lt;div&gt;&lt;span&gt;Label: ' + item.label + '&lt;/span&gt;&lt;br&gt;&lt;small&gt;Value: '+ item.value +')&lt;/small&gt;&lt;/div&gt;'
+        }
+    }
+}</code></pre>
+            </div>
+
+            <select ng-model="selectedOptions" ng-options="o.label for o in options" ng-selectize="config" multiple></select>
+
+            <hr>
+
+            <h4>Custom item renderer</h4>
+
+            <div>
+                Markup:
+                <pre><code class="html">&lt;select
+    ng-model="selectedOptions"
+    ng-selectize="config"&gt;
+    ng-options="o.label for o in options"
+    multiple
+&lt;/select&gt;</code></pre>
+            </div>
+
+            <div>
+                Javascript:
+                <pre><code class="javascript">$scope.config = {
+    render: {
+        item: function(item, escape) {
+            return '&lt;div&gt;&lt;span&gt;' + item.label + '&lt;/span&gt;&lt;small&gt;('+ item.value +')&lt;/small&gt;&lt;/div&gt;'
+        }
+    }
+}</code></pre>
+            </div>
+
+            <select ng-model="selectedOptions" ng-options="o.label for o in options" ng-selectize="config2" multiple></select>
+
+            <hr>
+
             <h3>Plugins</h3>
 
             <h4>remove_button</h4>
@@ -139,7 +193,7 @@
                 <pre><code class="html">&lt;select
     ng-model="selectedOption"
     ng-options="o.label for o in options"
-    ng-selectize="{plugins: ['remove_button']"
+    ng-selectize="{plugins: ['remove_button']"}
     multiple&gt;
 &lt;/select&gt;</code></pre>
             </div>

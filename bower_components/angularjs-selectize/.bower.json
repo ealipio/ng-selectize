@@ -1,6 +1,6 @@
 {
   "name": "ng-selectize",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "main": "ng-selectize.js",
   "ignore": [
     "bower_components",
@@ -21,13 +21,14 @@
     "angular-mocks": "1.2.8"
   },
   "homepage": "https://github.com/preventdefault/ng-selectize",
-  "_release": "0.1.6",
+  "_release": "0.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.6",
-    "commit": "98edc5846455a8250cc0f60657530aee080e146c"
+    "tag": "v0.2.0",
+    "commit": "9186ced3dcbcff1abdf2d509e5f2b96d1a396b05"
   },
   "_source": "git://github.com/preventdefault/ng-selectize.git",
-  "_target": "~0.1.3",
-  "_originalSource": "angularjs-selectize"
+  "_target": "~0.2.0",
+  "_originalSource": "angularjs-selectize",
+  "_direct": true
 }

@@ -23,4 +23,20 @@ angular.module('ngSelectizeDemo', ['ngSelectize'])
     $scope.selectRandomOption2 = function() {
       $scope.selectedOption2 = getRandomInt(1, 5);
     };
+
+    $scope.config = {
+      render: {
+        option: function(item, escapeFn) {
+          return '<div><span>Label: ' + item.label + '</span><br><small>Value: ' + item.value + '</small></div>'
+        }
+      }
+    };
+
+    $scope.config2 = {
+      render: {
+        item: function(item, escapeFn) {
+          return '<div><span>' + item.label + '</span>&nbsp;<small>(' + item.value + ')</small></div>'
+        }
+      }
+    };
 });
