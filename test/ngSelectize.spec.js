@@ -51,22 +51,21 @@ describe('Tests for the ngSelectize directive', function() {
           '<option value="1">One</option>' +
           '</select>');
 
+        element[0].selectize.focus();
+
         var ready = false;
         $scope.$apply();
 
         runs(function() {
           setTimeout(function() {
             ready = true;
+            var $content = element.next().find('.selectize-dropdown').find('.selectize-dropdown-content');
+            expect($content.children().length).toBe(2);
           }, 10);
         });
 
         waitsFor(function() {
           return ready;
-        });
-
-        runs(function() {
-          var $content = element.next().find('.selectize-dropdown').find('.selectize-dropdown-content');
-          expect($content.children().length).toBe(3);
         });
       });
 
@@ -99,17 +98,38 @@ describe('Tests for the ngSelectize directive', function() {
         runs(function() {
           setTimeout(function() {
             ready = true;
+            expect(element[0].selectize.getValue()).toBe('1');
           }, 10);
         });
 
         waitsFor(function() {
           return ready;
         });
+      });
+
+      it('should work with a initialized filled model', function() {
+        $scope.selected = '1';
+        var element = compile('<select ng-selectize ng-model="selected">' +
+          '<option value="0">Zero</option>' +
+          '<option value="1">One</option>' +
+          '</select>');
+
+        var ready = false;
+
+        $scope.$apply();
 
         runs(function() {
-          expect(element[0].selectize.getValue()).toBe('1');
+          setTimeout(function() {
+            ready = true;
+            expect(element[0].selectize.getValue()).toBe('1');
+          }, 10);
+        });
+
+        waitsFor(function() {
+          return ready;
         });
       });
+
     });
 
     describe('should handle "nulloption" properly', function() {
@@ -171,17 +191,25 @@ describe('Tests for the ngSelectize directive', function() {
       describe('placeholder option', function() {
 
         it('should display the placeholder when no ng-options are defined', function() {
-          var element = compile('<select ng-selectize="{placeholder:\'Eat my shorts!\'}" ng-model="selected">' +
+          $scope.config = {
+            placeholder: 'Eat my shorts!'
+          };
+
+          var element = compile('<select ng-selectize="config" ng-model="selected">' +
+            '<option value=""></option>' +
             '<option value="0">Zero</option>' +
             '<option value="1">One</option>' +
             '</select>');
 
           var ready = false;
+
           $scope.$apply();
 
           runs(function() {
             setTimeout(function() {
               ready = true;
+              var $content = element.next().find('.selectize-input');
+              expect($content.children('input').attr('placeholder')).toBe('Eat my shorts!');
             }, 10);
           });
 
@@ -189,10 +217,6 @@ describe('Tests for the ngSelectize directive', function() {
             return ready;
           });
 
-          runs(function() {
-            var $content = element.next().find('.selectize-input');
-            expect($content.children('input').attr('placeholder')).toBe('Eat my shorts!');
-          });
         });
 
         it('should display the placeholder when ng-options are defined', function() {
@@ -280,6 +304,67 @@ describe('Tests for the ngSelectize directive', function() {
           });
         });
 
+        it('custom option renderer should work with a static select (without ng-options)', function() {
+          $scope.config = {
+            render: {
+              option: function(option, escape) {
+                var label = option.text,
+                  value = option.value;
+
+                return '<div><span>' + escape(label) + '</span><span>' + escape(value) + '</span></div>';
+              }
+            }
+          };
+
+          var element = compile('<select ng-selectize="config" ng-model="selected"><option value="1">Option 1</option><option value="2">Option 2</option></select>');
+          $scope.$apply();
+
+          element[0].selectize.focus();
+
+          var ready = false;
+          runs(function() {
+            setTimeout(function() {
+              ready = true;
+              var dropDownContent = element.next().find('.selectize-dropdown-content').children('div').eq(0).html();
+              expect(dropDownContent).toBe('<span>Option 1</span><span>1</span>');
+            }, 10);
+          });
+
+          waitsFor(function() {
+            return ready;
+          });
+        });
+
+        it('custom item renderer should work with a static select (without ng-options)', function() {
+          $scope.selected = 1;
+
+          $scope.config = {
+            render: {
+              item: function(option, escape) {
+                var label = option.text,
+                  value = option.value;
+
+                return '<div><span>' + escape(label) + '</span><span>' + escape(value) + '</span></div>';
+              }
+            }
+          };
+
+          var element = compile('<select ng-selectize="config" ng-model="selected"><option value="1">Option 1</option><option value="2">Option 2</option></select>');
+          $scope.$apply();
+
+          var ready = false;
+          runs(function() {
+            setTimeout(function() {
+              ready = true;
+              var dropDownContent = element.next().find('.selectize-input').children().eq(0).html();
+              expect(dropDownContent).toBe('<span>Option 1</span><span>1</span>');
+            }, 10);
+          });
+
+          waitsFor(function() {
+            return ready;
+          });
+        });
 
       });
 
